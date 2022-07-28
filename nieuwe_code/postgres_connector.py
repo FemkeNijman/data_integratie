@@ -219,7 +219,7 @@ def ID_maker_ziektes(lijst_ziektes_P6, lijst_ziektes_P52):
 
 def parse(bestanden_SNP):  # Moet Femke commenten
     """
-    Deze fucntie parst de SNPs in een nieuw bestand
+    Deze fucntie parst de SNPs naar een nieuw bestand
     :param bestanden_SNP: Een lijst met de naam van de SNP bestanden
     :type bestanden_SNP: lijst
     :return:
@@ -228,13 +228,13 @@ def parse(bestanden_SNP):  # Moet Femke commenten
     """
     try:
         bestand_lijst = []
-        for bestand in bestanden_SNP:
-            bestand_open = open(bestand)
+        for bestand in bestanden_SNP: #gaat door de lijst met bestanden heen
+            bestand_open = open(bestand) #maakt een variatie op de bestandsnaam door "variant" toe te voegen aan het einde
             variant_bestand = open(bestand + "variant", "w")
             bestand_lijst.append(bestand + "variant")
             for line in bestand_open:
-                if "missense_variant" in line or "frameshift_variant" in line:
-                    variant_bestand.write(line)
+                if "missense_variant" in line or "frameshift_variant" in line: #als deze variant voorkomt in de file
+                    variant_bestand.write(line) #schijft elke hit toe aan het nieuwe variant_bestand
             bestand_open.close()
             variant_bestand.close()
         return bestand_lijst
