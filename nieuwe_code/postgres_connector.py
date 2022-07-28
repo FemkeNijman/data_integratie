@@ -217,7 +217,7 @@ def ID_maker_ziektes(lijst_ziektes_P6, lijst_ziektes_P52):
         print(error)
 
 
-def parse(bestanden_SNP):  # Moet Femke commenten
+def parse(bestanden_SNP):
     """
     Deze fucntie parst de SNPs naar een nieuw bestand
     :param bestanden_SNP: Een lijst met de naam van de SNP bestanden
