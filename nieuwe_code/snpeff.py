@@ -1,20 +1,25 @@
 import subprocess, re
 
-def snpeff(output_files, bestanden_lijst):
-    for bestand in bestanden_lijst:
-        nummer = re.findall(r"00..", bestand)
-        with open(bestand, "w") as cmd_out_file:
+def snpeff(snpeff_output_files):
+    """
+    Snpeff kan via deze functie aangeroepen worden.
+    Dit werkt alleen als het script vanuit een Linux Terminal aangeroepen wordt
+    :param output_files: Een list met alle namen van de output files die gemaakt moeten worden
+    :type output_files: list
+    """
+    for bestand in snpeff_output_files:
+        nummer = re.findall(r"00..", bestand) #vindt het participantnummer in elk meegegeven bestand
+        with open(bestand, "w") as snpeff_output: #schrijft naar een nieuw bestand als output file
             completed_process = subprocess.run(
                 [
                     "conda", "run", "snpEff", "-Xmx8g", "GRCh37.75", "-no-downstream", "-no-intergenic",
                     "-no-intron", "-no-upstream", "-no-utr", "-verbose", "-noStats",
                     "files/PGPC_" + "".join(nummer) + "_S1.flt.vcf21",
-                ],
-                stdout=cmd_out_file
+                ], #het snpeff-commando met alle bijbehorende variabelen
+                stdout=snpeff_output
             )
 
 def main():
-    output_files = ["files/PGPC_0006.chr21.snpEff.vcf", "files/PGPC_0052.chr21.snpEff.vcf"]
-    bestanden_lijst = ["files/PGPC_0006_S1.flt.vcf21", "files/PGPC_00052_S1.flt.vcf21"]
-    snpeff(output_files, bestanden_lijst)
+    snpeff_output_files = ["files/PGPC_0006.chr21.snpEff.vcf", "files/PGPC_0052.chr21.snpEff.vcf"]
+    snpeff(snpeff_output_files)
 main()
