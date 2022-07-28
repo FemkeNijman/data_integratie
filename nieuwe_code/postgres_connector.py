@@ -649,7 +649,6 @@ def database_fetch(ziektes_aangepast_P6, ziektes_aangepast_P52,
 
         cursor.close()
         connection.close()
-        print(totale_lijst_dicts)
         return totale_lijst_dicts
 
     except(Exception, psycopg2.DatabaseError, ValueError, IndexError,
